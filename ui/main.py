@@ -7,9 +7,6 @@ import roop.utilities as util
 import ui.globals as uii
 
 from ui.tabs.faceswap_tab import faceswap_tab
-from ui.tabs.livecam_tab import livecam_tab
-from ui.tabs.facemgr_tab import facemgr_tab
-from ui.tabs.extras_tab import extras_tab
 from ui.tabs.settings_tab import settings_tab
 
 roop.globals.keep_fps = None
@@ -62,14 +59,11 @@ def run():
                     gr.Markdown(f"### [{roop.metadata.name} {roop.metadata.version}](https://github.com/C0untFloyd/roop-unleashed)")
                     gr.HTML(util.create_version_html(), elem_id="versions")
             faceswap_tab()
-            livecam_tab()
-            facemgr_tab()
-            extras_tab()
             settings_tab()
 
         uii.ui_restart_server = False
         try:
-            ui.queue().launch(inbrowser=True, server_name=server_name, server_port=server_port, share=roop.globals.CFG.server_share, ssl_verify=ssl_verify, prevent_thread_lock=True, show_error=True)
+            ui.queue().launch(inbrowser=True, server_name=server_name, server_port=server_port, share=True, ssl_verify=ssl_verify, prevent_thread_lock=True, show_error=True)
         except Exception as e:
             print(f'Exception {e} when launching Gradio Server!')
             uii.ui_restart_server = True
