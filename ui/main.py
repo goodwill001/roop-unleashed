@@ -10,8 +10,6 @@ from ui.tabs.faceswap_tab import faceswap_tab
 from ui.tabs.settings_tab import settings_tab
 
 roop.globals.keep_fps = None
-roop.globals.keep_frames = None
-roop.globals.skip_audio = None
 roop.globals.use_batch = None
 
 
@@ -55,9 +53,6 @@ def run():
             server_port = None
         ssl_verify = False if server_name == '0.0.0.0' else True
         with gr.Blocks(title=f'{roop.metadata.name} {roop.metadata.version}', theme=roop.globals.CFG.selected_theme, css=mycss, delete_cache=(60, 86400)) as ui:
-            with gr.Row(variant='compact'):
-                    gr.Markdown(f"### [{roop.metadata.name} {roop.metadata.version}](https://github.com/C0untFloyd/roop-unleashed)")
-                    gr.HTML(util.create_version_html(), elem_id="versions")
             faceswap_tab()
             settings_tab()
 
@@ -76,8 +71,6 @@ def run():
             print("Keyboard interruption in main thread... closing server.")
             run_server = False
         ui.close()
-
-
+        
 def show_msg(msg: str):
     gr.Info(msg)
-
