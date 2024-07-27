@@ -55,7 +55,7 @@ def faceswap_tab():
                             mask_erosion = gr.Slider(1.0, 3.0, value=1.0, label="Erosion Iterations", step=1.00, interactive=True)
                             mask_blur = gr.Slider(10.0, 50.0, value=20.0, label="Blur size", step=1.00, interactive=True)
                             bt_toggle_masking = gr.Button("Toggle manual masking", variant='secondary', size='sm')
-                            selected_mask_engine = gr.Dropdown(["None", "Clip2Seg", "DFL XSeg"], value="None", label="Face masking engine")
+                            selected_mask_engine = gr.Dropdown(["None", "Clip2Seg", "DFL XSeg"], value="DFL XSeg", label="Face masking engine")
                             clip_text = gr.Textbox(label="List of objects to mask and restore back on fake face", value="cup,hands,hair,banana", interactive=False)
                             bt_preview_mask = gr.Button("👥 Show Mask Preview", variant='secondary')
                         bt_remove_selected_input_face = gr.Button("❌ Remove selected", size='sm')
@@ -101,15 +101,15 @@ def faceswap_tab():
             with gr.Column(scale=1):
                 num_swap_steps = gr.Slider(1, 5, value=1, step=1.0, label="Number of swapping steps", info="More steps may increase likeness")
             with gr.Column(scale=2):
-                ui.globals.ui_selected_enhancer = gr.Dropdown(["None", "Codeformer", "DMDNet", "GFPGAN", "GPEN", "Restoreformer++"], value="None", label="Select post-processing")
+                ui.globals.ui_selected_enhancer = gr.Dropdown(["None", "Codeformer", "DMDNet", "GFPGAN", "GPEN", "Restoreformer++"], value="Restoreformer++", label="Select post-processing")
 
         with gr.Row(variant='panel'):
             with gr.Column(scale=1):
-                max_face_distance = gr.Slider(0.01, 1.0, value=0.65, label="Max Face Similarity Threshold", info="0.0 = identical 1.0 = no similarity")
+                max_face_distance = gr.Slider(0.01, 1.0, value=1.0, label="Max Face Similarity Threshold", info="0.0 = identical 1.0 = no similarity")
             with gr.Column(scale=1):
                 ui.globals.ui_upscale = gr.Dropdown(["128px", "256px", "512px"], value="128px", label="Subsample upscale to", interactive=True)
             with gr.Column(scale=2):
-                ui.globals.ui_blend_ratio = gr.Slider(0.0, 1.0, value=0.65, label="Original/Enhanced image blend ratio", info="Only used with active post-processing")
+                ui.globals.ui_blend_ratio = gr.Slider(0.0, 1.0, value=0.3, label="Original/Enhanced image blend ratio", info="Only used with active post-processing")
 
 
         with gr.Row(variant='panel'):
